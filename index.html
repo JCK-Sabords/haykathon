@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Handbook des participants du Haykathon : esprit, déroulé des 24 heures, règles, évaluation, outils, pitch et FAQ.">
+<title>Haykathon Handbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+Armenian:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F6FA;
+    --surface: #FFFFFF;
+    --surface-2: #EBEEF6;
+    --ink: #141A2E;
+    --muted: #586078;
+    --line: #DADFEA;
+    --blue: #0B2A6F;
+    --blue-ink: #0B2A6F;
+    --orange: #E89A00;
+    --orange-soft: #FFF3D6;
+    --red: #C8102E;
+    --on-blue: #FFFFFF;
+    --display: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    --body: 'Work Sans', 'Segoe UI', Arial, sans-serif;
+    --mono: 'JetBrains Mono', Consolas, monospace;
+    --arm: 'Noto Sans Armenian', 'Montserrat', sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #0A1024;
+      --surface: #111A36;
+      --surface-2: #18234A;
+      --ink: #EDF0F9;
+      --muted: #A3ABC4;
+      --line: #25315A;
+      --blue: #16378C;
+      --blue-ink: #9DB6FF;
+      --orange: #F5B42A;
+      --orange-soft: #2E2612;
+      --red: #FF5A6E;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0A1024;
+    --surface: #111A36;
+    --surface-2: #18234A;
+    --ink: #EDF0F9;
+    --muted: #A3ABC4;
+    --line: #25315A;
+    --blue: #16378C;
+    --blue-ink: #9DB6FF;
+    --orange: #F5B42A;
+    --orange-soft: #2E2612;
+    --red: #FF5A6E;
+  }
+
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.6; margin: 0; }
+  a { color: var(--blue-ink); }
+  :focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; border-radius: 4px; }
+  @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+  html { scroll-behavior: smooth; }
+
+  .flag { display: flex; height: 6px; }
+  .flag span { flex: 1; }
+  .flag span:nth-child(1) { background: #C8102E; }
+  .flag span:nth-child(2) { background: #0B2A6F; }
+  .flag span:nth-child(3) { background: #F2A800; }
+
+  /* Hero */
+  .hero { background: var(--blue); color: var(--on-blue); padding-block: 48px 40px; padding-inline: 16px; position: relative; overflow: hidden; }
+  .hero-inner { max-width: 1120px; margin: 0 auto; display: grid; gap: 20px; position: relative; }
+  .hero .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #F2A800; }
+  .hero h1 { font-family: var(--display); font-weight: 800; font-size: clamp(40px, 8vw, 76px); line-height: .95; letter-spacing: -.03em; margin: 0; text-wrap: balance; }
+  .hero h1 em { font-style: normal; color: #F2A800; }
+  .hero p.lead { font-size: 19px; max-width: 34em; margin: 0; color: rgba(255,255,255,.9); }
+  .hero .ghost { position: absolute; right: -2%; bottom: -34%; font-family: var(--arm); font-weight: 800; font-size: clamp(220px, 34vw, 420px); line-height: 1; color: rgba(255,255,255,.06); pointer-events: none; user-select: none; }
+  .facts { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 8px; }
+  .facts div { display: grid; gap: 2px; }
+  .facts small { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.6); }
+  .facts b { font-family: var(--display); font-weight: 700; font-size: 15px; }
+  .draft { max-width: 1120px; margin: 16px auto 0; padding-inline: 16px; font-size: 13px; color: var(--muted); }
+  .draft span { background: var(--orange-soft); color: var(--ink); padding: 2px 8px; border-radius: 4px; font-family: var(--mono); font-size: 12px; }
+
+  /* Layout */
+  .wrap { max-width: 1120px; margin: 0 auto; padding-inline: 16px; padding-block: 24px 80px; display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 56px; }
+  nav.toc { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); align-self: start; }
+  nav.toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+  nav.toc a { display: grid; grid-template-columns: 30px 1fr; align-items: baseline; gap: 6px; padding: 7px 10px; border-radius: 6px; text-decoration: none; color: var(--muted); font-size: 14px; font-weight: 500; }
+  nav.toc a .n { font-family: var(--arm); font-weight: 700; color: var(--orange); font-size: 15px; }
+  nav.toc a:hover, nav.toc a.active { background: var(--surface-2); color: var(--ink); }
+  nav.toc .toc-title { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px 10px; }
+  nav.toc .toc-note { font-size: 12px; color: var(--muted); margin: 14px 10px 0; line-height: 1.5; }
+
+  main { display: grid; gap: 72px; min-width: 0; }
+  section { scroll-margin-top: 24px; display: grid; gap: 20px; }
+  .sec-head { display: grid; grid-template-columns: auto 1fr; gap: 4px 18px; align-items: end; border-bottom: 2px solid var(--ink); padding-bottom: 14px; }
+  .sec-num { font-family: var(--arm); font-weight: 800; font-size: 56px; line-height: .9; color: var(--orange); grid-row: span 2; }
+  .sec-kicker { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  h2 { font-family: var(--display); font-weight: 800; font-size: clamp(26px, 4vw, 36px); line-height: 1.1; letter-spacing: -.02em; margin: 0; text-wrap: balance; }
+  h3 { font-family: var(--display); font-weight: 700; font-size: 18px; margin: 0; color: var(--ink); }
+  p { margin: 0; max-width: 66ch; }
+  .intro { font-size: 18px; color: var(--muted); }
+  .muted { color: var(--muted); }
+
+  /* Spirit */
+  .spirit { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .spirit div { background: var(--surface); padding: 22px; display: grid; gap: 8px; align-content: start; }
+  .spirit b { font-family: var(--display); font-size: 20px; font-weight: 800; color: var(--blue-ink); }
+  .spirit p { color: var(--muted); font-size: 15px; }
+
+  /* Timeline */
+  .timeline { list-style: none; margin: 0; padding: 0; display: grid; }
+  .timeline li { display: grid; grid-template-columns: 76px 20px minmax(0, 1fr); gap: 0 14px; }
+  .timeline time { font-family: var(--mono); font-weight: 700; font-size: 15px; padding-top: 14px; font-variant-numeric: tabular-nums; text-align: right; }
+  .timeline .rail { position: relative; }
+  .timeline .rail::before { content: ""; position: absolute; left: 9px; top: 0; bottom: 0; width: 2px; background: var(--line); }
+  .timeline .rail::after { content: ""; position: absolute; left: 4px; top: 19px; width: 12px; height: 12px; border-radius: 50%; background: var(--surface); border: 2px solid var(--muted); }
+  .timeline li.key .rail::after { background: var(--orange); border-color: var(--orange); }
+  .timeline li:nth-child(2) .rail::before { top: 19px; }
+  .timeline li:last-child .rail::before { bottom: calc(100% - 25px); }
+  .timeline .what { padding-block: 12px 16px; display: grid; gap: 2px; }
+  .timeline .what b { font-family: var(--display); font-weight: 700; font-size: 16px; }
+  .timeline .what span { color: var(--muted); font-size: 15px; }
+  .tag { display: inline-block; font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; background: var(--orange-soft); color: var(--ink); margin-left: 6px; vertical-align: 2px; }
+
+  .timeline li.day { display: block; font-family: var(--mono); font-weight: 700; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--orange); padding: 22px 0 6px 110px; }
+  .timeline li.day:first-child { padding-top: 0; }
+  .pts { grid-row: 1; grid-column: 2; font-family: var(--mono); font-weight: 700; font-size: 14px; color: var(--orange); white-space: nowrap; }
+  /* Rules */
+  .rules { list-style: none; counter-reset: r; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .rules li { counter-increment: r; display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .rules li::before { content: counter(r, decimal-leading-zero); font-family: var(--mono); font-weight: 700; color: var(--orange); font-size: 15px; padding-top: 2px; }
+  .rules b { font-family: var(--display); font-weight: 700; }
+  .rules p { color: var(--muted); font-size: 15px; margin-top: 2px; }
+
+  .split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px; display: grid; gap: 10px; align-content: start; }
+  .panel ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 15px; }
+  .panel.yes h3 { color: #1F8A4C; }
+  .panel.no h3 { color: var(--red); }
+  :root[data-theme="dark"] .panel.yes h3 { color: #5BD08A; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .panel.yes h3 { color: #5BD08A; } }
+
+  /* Criteria */
+  .criteria { display: grid; gap: 12px; }
+  .crit { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 20px; align-items: start; }
+  .crit p { color: var(--muted); font-size: 15px; grid-column: 1; }
+  .crit .five { grid-column: 1 / -1; font-size: 14px; background: var(--surface-2); border-radius: 6px; padding: 8px 12px; }
+  .crit .five b { font-family: var(--mono); font-size: 12px; color: var(--blue-ink); margin-right: 6px; }
+  .scale { display: flex; gap: 4px; grid-row: 1; grid-column: 2; }
+  .scale i { width: 10px; height: 18px; border-radius: 2px; background: var(--line); }
+  .scale i:nth-child(-n+5) { background: var(--orange); opacity: calc(.25 + var(--k) * .15); }
+  .score-sum { display: flex; flex-wrap: wrap; gap: 12px 32px; align-items: baseline; background: var(--blue); color: var(--on-blue); border-radius: 10px; padding: 18px 22px; }
+  .score-sum b { font-family: var(--display); font-size: 30px; font-weight: 800; }
+  .score-sum span { font-size: 14px; color: rgba(255,255,255,.8); max-width: 44ch; }
+
+  .callout { border-left: 4px solid var(--orange); background: var(--orange-soft); border-radius: 0 8px 8px 0; padding: 14px 18px; display: grid; gap: 6px; }
+  .callout b { font-family: var(--display); }
+  .callout p { font-size: 15px; }
+
+  /* Checklist */
+  .check { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .check label { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; align-items: start; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; cursor: pointer; }
+  .check input { width: 18px; height: 18px; margin: 3px 0 0; accent-color: var(--orange); }
+  .check b { font-weight: 600; }
+  .check span { display: block; color: var(--muted); font-size: 14px; }
+  .check input:checked + span { opacity: .55; }
+  .check-count { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+
+  /* Tools */
+  .tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+  .tool { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; display: grid; gap: 6px; align-content: start; }
+  .tool .k { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--orange); }
+  .tool b { font-family: var(--display); font-weight: 700; }
+  .tool span { font-size: 14px; color: var(--muted); }
+
+  /* Ideas */
+  .ideas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; }
+  .idea { padding: 14px 0; border-bottom: 1px solid var(--line); display: grid; gap: 3px; }
+  .idea b { font-family: var(--display); font-weight: 700; font-size: 16px; }
+  .idea span { color: var(--muted); font-size: 14px; }
+
+  /* Pitch */
+  .pitchbar { display: flex; border-radius: 8px; overflow: hidden; height: 64px; font-size: 12.5px; }
+  .pitchbar div { display: grid; align-content: center; padding: 0 10px; color: #fff; min-width: 0; }
+  .pitchbar div b { font-family: var(--mono); font-size: 13px; }
+  .pitchbar div span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .prompt { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+  .prompt pre { margin: 0; padding: 18px 20px; font-family: var(--mono); font-size: 13px; line-height: 1.6; white-space: pre-wrap; overflow-x: auto; color: var(--ink); }
+  .prompt .bar { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px 10px 20px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  button.copy { font: 600 13px var(--body); background: var(--ink); color: var(--bg); border: 0; border-radius: 6px; padding: 7px 12px; cursor: pointer; }
+
+  /* FAQ */
+  details { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+  details + details { margin-top: 8px; }
+  summary { cursor: pointer; padding: 14px 18px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+  summary::after { content: "+"; font-family: var(--mono); color: var(--orange); font-weight: 700; }
+  details[open] summary::after { content: "−"; }
+  details p { padding: 0 18px 16px; color: var(--muted); font-size: 15px; }
+
+  .outro { background: var(--blue); color: var(--on-blue); border-radius: 12px; padding: 32px; display: grid; gap: 10px; }
+  .outro h2 { color: #fff; }
+  .outro p { color: rgba(255,255,255,.85); }
+
+  @media (max-width: 880px) {
+    .wrap { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+    nav.toc { position: static; overflow-x: auto; margin-inline: -16px; padding-inline: 16px; }
+    nav.toc ol { display: flex; gap: 6px; width: max-content; }
+    nav.toc a { grid-template-columns: auto auto; background: var(--surface); border: 1px solid var(--line); white-space: nowrap; }
+    nav.toc .toc-title, nav.toc .toc-note { display: none; }
+  }
+  @media (max-width: 640px) {
+    .spirit, .split, .ideas, .tips { grid-template-columns: minmax(0, 1fr); }
+    .timeline li { grid-template-columns: 54px 20px minmax(0, 1fr); gap: 0 10px; }
+    .timeline time { font-size: 13px; }
+    .timeline li.day { padding-left: 74px; }
+    .sec-num { font-size: 44px; }
+    .pitchbar { height: auto; flex-direction: column; }
+    .pitchbar div { padding: 8px 12px; flex: none !important; }
+  }
+</style>
+</head>
+<body>
+
+
+<div class="flag" aria-hidden="true"><span></span><span></span><span></span></div>
+<header class="hero">
+  <div class="ghost" aria-hidden="true">Հ</div>
+  <div class="hero-inner">
+    <div class="eyebrow">Handbook des participants · 1re édition</div>
+    <h1>Haykathon.<br><em>De l’idée au premier euro.</em></h1>
+    <p class="lead">24 heures pour créer un vrai petit business, entouré de la communauté. Ce guide tient en quelques minutes de lecture : l’esprit, le déroulé, les règles (peu nombreuses) et tout ce qu’il faut préparer.</p>
+    <div class="facts">
+      <div><small>Date</small><b>[date à confirmer]</b></div>
+      <div><small>Lieu</small><b>Salle paroissiale Sainte-Croix des Arméniens</b></div>
+      <div><small>Adresse</small><b>13 rue du Perche, Paris 3e</b></div>
+      <div><small>Format</small><b>24 h de build, 30 participants</b></div>
+    </div>
+  </div>
+</header>
+<p class="draft"><span>Brouillon</span> Les éléments entre crochets sont à compléter par l’équipe d’organisation avant diffusion.</p>
+
+<div class="wrap">
+  <nav class="toc" aria-label="Sommaire">
+    <p class="toc-title">Sommaire</p>
+    <ol>
+      <li><a href="#esprit"><span class="n">Ա</span>L’esprit</a></li>
+      <li><a href="#journee"><span class="n">Բ</span>Le déroulé</a></li>
+      <li><a href="#regles"><span class="n">Գ</span>Les règles</a></li>
+      <li><a href="#evaluation"><span class="n">Դ</span>L’évaluation</a></li>
+      <li><a href="#preparer"><span class="n">Ե</span>Avant de venir</a></li>
+      <li><a href="#outils"><span class="n">Զ</span>Boîte à outils</a></li>
+      <li><a href="#idees"><span class="n">Է</span>Idées</a></li>
+      <li><a href="#pitch"><span class="n">Ը</span>Le pitch</a></li>
+      <li><a href="#sur-place"><span class="n">Թ</span>Sur place</a></li>
+      <li><a href="#apres"><span class="n">Ժ</span>Après</a></li>
+      <li><a href="#faq"><span class="n">ԺԱ</span>FAQ</a></li>
+    </ol>
+    <p class="toc-note">Les sections sont numérotées en lettres arméniennes, qui servent aussi de chiffres : Ա = 1, Բ = 2… Ժ = 10.</p>
+  </nav>
+
+  <main>
+    <!-- Ա -->
+    <section id="esprit">
+      <div class="sec-head"><span class="sec-num">Ա</span><span class="sec-kicker">Pourquoi on est là</span><h2>L’esprit du Haykathon</h2></div>
+      <p class="intro">Le Haykathon n’est pas une compétition de développeurs. C’est un week-end où des profils très différents construisent ensemble quelque chose qui peut rapporter son premier euro avant la fin du build.</p>
+      <div class="spirit">
+        <div><b>Tout le monde livre</b><p>Chaque équipe repart avec quelque chose qui fonctionne : une page, une appli, un service. Imparfait, mais réel.</p></div>
+        <div><b>Apprendre avant de gagner</b><p>Le prix fait plaisir, mais la vraie récompense, c’est ce que tu sais faire le dimanche et que tu ne savais pas faire le samedi.</p></div>
+        <div><b>La communauté est la moitié de la valeur</b><p>La personne à côté de toi est peut-être ta future associée, ton premier client ou ton mentor. Parle à la table d’à côté.</p></div>
+        <div><b>Tous les niveaux ont leur place</b><p>Tech, business, design ou simple curiosité : une bonne équipe mélange les profils. Personne ne sait tout faire, c’est voulu.</p></div>
+      </div>
+    </section>
+
+    <!-- Բ -->
+    <section id="journee">
+      <div class="sec-head"><span class="sec-num">Բ</span><span class="sec-kicker">Le déroulé</span><h2>24 heures, heure par heure</h2></div>
+      <p class="muted">Du samedi 09:30 au dimanche 14:00, dont 24 heures de build. Horaires indicatifs, ajustés sur place.</p>
+      <ol class="timeline">
+        <li class="day">Samedi</li>
+        <li><time>09:30</time><span class="rail"></span><div class="what"><b>Accueil et petit-déjeuner</b><span>Badge, café, installation. On branche les ordinateurs et on teste la connexion.</span></div></li>
+        <li class="key"><time>10:15</time><span class="rail"></span><div class="what"><b>Lancement <span class="tag">temps fort</span></b><span>L’esprit, les règles, les mentors, le jury. Puis chaque porteur d’idée la présente en une minute.</span></div></li>
+        <li class="key"><time>10:30</time><span class="rail"></span><div class="what"><b>Équipes constituées, début du build <span class="tag">24 h</span></b><span>Le chrono de 24 heures démarre avec le sprint 1 : pour qui, quel problème, qui paiera. L’organisation se réserve le droit d’équilibrer les équipes si nécessaire.</span></div></li>
+        <li><time>12:30</time><span class="rail"></span><div class="what"><b>Checkpoint 1</b><span>Un mentor passe à chaque table : « Pour qui ? Quel problème ? Qui paiera ? »</span></div></li>
+        <li><time>13:00</time><span class="rail"></span><div class="what"><b>Déjeuner ensemble</b><span>On mange ensemble, loin des écrans. C’est aussi là que naissent les bonnes idées.</span></div></li>
+        <li><time>14:00</time><span class="rail"></span><div class="what"><b>Sprint 2 : le produit</b><span>Un produit que quelqu’un d’extérieur peut utiliser, et une page de vente en ligne.</span></div></li>
+        <li><time>17:00</time><span class="rail"></span><div class="what"><b>Checkpoint 2</b><span>« Quelqu’un d’extérieur peut-il l’utiliser ? Le lien de paiement existe-t-il ? »</span></div></li>
+        <li><time>17:30</time><span class="rail"></span><div class="what"><b>Sprint 3 : les premiers clients</b><span>Publier, démarcher, vendre. Viser le premier euro avant la nuit.</span></div></li>
+        <li><time>20:00</time><span class="rail"></span><div class="what"><b>Dîner</b><span>Pause collective avant la dernière ligne droite de la soirée.</span></div></li>
+        <li><time>22:00</time><span class="rail"></span><div class="what"><b>Checkpoint 3, le dernier</b><span>Où en est le premier euro ? Qu’est-ce qui reste à finir cette nuit ? Chaque équipe repart avec son plan.</span></div></li>
+        <li><time>22:30</time><span class="rail"></span><div class="what"><b>Sprint de nuit</b><span>Finitions, vente et préparation du pitch, à ton rythme. Dormir fait aussi partie de la stratégie.</span></div></li>
+        <li class="day">Dimanche</li>
+        <li><time>08:00</time><span class="rail"></span><div class="what"><b>Petit-déjeuner et répétition du pitch</b><span>Chaque équipe répète ses 10 minutes, chronomètre en main.</span></div></li>
+        <li class="key"><time>10:30</time><span class="rail"></span><div class="what"><b>Fin du build <span class="tag">temps fort</span></b><span>On arrête de construire, tout doit être en ligne. Puis on se rend à la messe.</span></div></li>
+        <li class="key"><time>12:30</time><span class="rail"></span><div class="what"><b>Pitchs devant la paroisse <span class="tag">temps fort</span></b><span>10 minutes par équipe, en direct, devant le jury et l’ensemble de la paroisse.</span></div></li>
+        <li><time>13:45</time><span class="rail"></span><div class="what"><b>Délibération et vote du public</b><span>Le jury délibère, la salle vote pour son coup de cœur.</span></div></li>
+        <li class="key"><time>14:00</time><span class="rail"></span><div class="what"><b>Remise des prix <span class="tag">temps fort</span></b><span>Trophée, photos, et on fête ce qui a été construit en 24 heures.</span></div></li>
+      </ol>
+    </section>
+
+    <!-- Գ -->
+    <section id="regles">
+      <div class="sec-head"><span class="sec-num">Գ</span><span class="sec-kicker">Peu nombreuses</span><h2>Les règles</h2></div>
+      <p class="intro">Six règles, surtout du bon sens. Tout ce qui n’est pas interdit ici est autorisé.</p>
+      <ol class="rules">
+        <li><div><b>Ouvert à tous, la communauté en priorité.</b><p>Les inscriptions sont ouvertes à tous, avec une priorité donnée aux membres de la communauté arménienne.</p></div></li>
+        <li><div><b>Solo si tu es du métier, sinon en équipe.</b><p>Tu peux venir seul si tu as un profil tech. Sinon, tu viens en équipe avec au moins une personne expérimentée en tech. Pas d’équipe ? Viens quand même, les équipes se constituent à 10:30. L’organisation se réserve le droit de les équilibrer si nécessaire.</p></div></li>
+        <li><div><b>On construit le jour J.</b><p>Une idée, des croquis ou une maquette préparés avant : oui. Un produit déjà existant retouché la veille : non.</p></div></li>
+        <li><div><b>Tous les outils sont permis.</b><p>IA, no-code, code, tableur : utilise ce qui te fait avancer. Les abonnements et crédits d’outils restent à ta charge, les offres gratuites suffisent largement.</p></div></li>
+        <li><div><b>Bienveillance obligatoire.</b><p>On challenge les idées, jamais les personnes. On aide les autres équipes quand on peut.</p></div></li>
+        <li><div><b>La décision du jury est finale.</b><p>Le jury tranche les cas limites et les égalités. On en discute volontiers après la remise des prix, mais on ne refait pas le match.</p></div></li>
+      </ol>
+      <div class="split">
+        <div class="panel yes"><h3>Point de départ accepté</h3><ul><li>Partir de zéro le samedi matin</li><li>Une idée ou une maquette préparée avant, jamais construite</li><li>Un modèle ou un template de départ (Lovable, Next.js, Carrd…)</li><li>Des services prêts à brancher (Stripe, Supabase, Tally)</li></ul></div>
+        <div class="panel no"><h3>Point de départ refusé</h3><ul><li>Un produit existant avec quelques retouches</li><li>Le produit de ton entreprise, même rhabillé</li><li>Du travail réalisé à distance par une personne absente</li></ul><p class="muted" style="font-size:14px">Un doute ? Parles-en à un mentor dès le lancement. Être transparent règle presque tous les cas.</p></div>
+      </div>
+    </section>
+
+    <!-- Դ -->
+    <section id="evaluation">
+      <div class="sec-head"><span class="sec-num">Դ</span><span class="sec-kicker">Ce que regarde le jury</span><h2>L’évaluation</h2></div>
+      <p class="intro">Cinq critères, notés chacun sur 20, pour une note finale sur 100. Tu les connais dès le lancement : construis dans leur direction.</p>
+      <div class="criteria">
+        <div class="crit"><h3>1. L’idée</h3><span class="pts">/ 20</span><p>Un vrai problème, pour des gens précis, qui ont une raison de payer.</p><div class="five"><b>20/20</b>Le jury se dit « j’en connais qui en ont besoin ».</div></div>
+        <div class="crit"><h3>2. La réalisation</h3><span class="pts">/ 20</span><p>Un produit que quelqu’un d’extérieur peut utiliser, pas une présentation.</p><div class="five"><b>20/20</b>Un juré l’utilise sur son propre téléphone pendant le pitch.</div></div>
+        <div class="crit"><h3>3. Le business plan</h3><span class="pts">/ 20</span><p>Qui paie, combien, et pourquoi ça peut devenir rentable.</p><div class="five"><b>20/20</b>Un prix, un coût, une marge, en une slide simple.</div></div>
+        <div class="crit"><h3>4. Le plan marketing</h3><span class="pts">/ 20</span><p>Comment tu trouves tes 100 premiers clients, concrètement.</p><div class="five"><b>20/20</b>Des canaux précis, déjà testés pendant le build.</div></div>
+        <div class="crit"><h3>5. Le premier euro</h3><span class="pts">/ 20</span><p>Quelqu’un a réellement payé pour ton produit pendant les 24 heures.</p><div class="five"><b>20/20</b>Plusieurs paiements de personnes extérieures à l’équipe.</div></div>
+      </div>
+      <div class="score-sum"><b>/ 100</b><span>La somme des cinq notes sur 20 donne la note finale et le classement. En cas d’égalité, le vote du public (coup de cœur de la salle) départage les équipes.</span></div>
+      <div class="callout"><b>Ce qui compte comme « premier euro »</b><p>Un paiement réel, même symbolique (1 € suffit), effectué par une personne extérieure à ton équipe : précommande, lien de paiement, abonnement. Un paiement d’un membre de l’équipe ne compte pas. Le test : si ton produit disparaît demain, ce paiement a-t-il encore un sens ? Si non, il compte.</p></div>
+    </section>
+
+    <!-- Ե -->
+    <section id="preparer">
+      <div class="sec-head"><span class="sec-num">Ե</span><span class="sec-kicker">Une seule chose</span><h2>Avant de venir</h2></div>
+      <div class="callout"><b>Une seule chose à apporter : ton ordinateur portable, avec son chargeur.</b><p>Tout le reste est prévu sur place.</p></div>
+    </section>
+
+    <!-- Զ -->
+    <section id="outils">
+      <div class="sec-head"><span class="sec-num">Զ</span><span class="sec-kicker">Suggestions, pas obligations</span><h2>Boîte à outils</h2></div>
+      <p class="intro">Pas besoin de savoir coder pour livrer un produit en 24 heures. Voici de quoi couvrir chaque étape, avec des offres gratuites pour démarrer.</p>
+      <div class="tools">
+        <div class="tool"><span class="k">Construire</span><b>Lovable, Bolt, Cursor, Claude Code</b><span>Décris ton appli en français, l’IA la construit. Cursor et Claude Code pour les profils tech.</span></div>
+        <div class="tool"><span class="k">Page de vente</span><b>Carrd, Framer, Lovable</b><span>Une page claire avec un bouton d’achat vaut mieux qu’une appli sans client.</span></div>
+        <div class="tool"><span class="k">Encaisser</span><b>Stripe Payment Links, SumUp, Lydia Pro</b><span>Un lien de paiement se crée en 2 minutes, si ton compte est validé à l’avance.</span></div>
+        <div class="tool"><span class="k">Collecter</span><b>Tally, Google Forms</b><span>Précommandes, liste d’attente, questionnaire client.</span></div>
+        <div class="tool"><span class="k">Réfléchir</span><b>ChatGPT, Claude, Le Chat</b><span>Business plan, persona, textes de vente, préparation du pitch.</span></div>
+        <div class="tool"><span class="k">Designer</span><b>Canva, Figma</b><span>Logo, visuels pour les réseaux, slides du pitch.</span></div>
+        <div class="tool"><span class="k">Faire connaître</span><b>WhatsApp, Instagram, LinkedIn</b><span>Les groupes de la communauté sont ton premier marché. Utilise-les.</span></div>
+      </div>
+    </section>
+
+    <!-- Է -->
+    <section id="idees">
+      <div class="sec-head"><span class="sec-num">Է</span><span class="sec-kicker">Pour débloquer la page blanche</span><h2>Banque d’idées</h2></div>
+      <p class="intro">Tu viens avec ta propre idée, c’est le mieux. Si tu cherches encore, pioche ici. Rien n’oblige à rester dans la thématique arménienne.</p>
+      <div class="ideas">
+        <div class="idea"><b>Annuaire des pros de la communauté</b><span>Trouver un avocat, un plombier ou un médecin arménophone près de chez soi.</span></div>
+        <div class="idea"><b>L’arménien pour les enfants</b><span>Mini-leçons, comptines et jeux pour transmettre la langue à la maison.</span></div>
+        <div class="idea"><b>Billetterie pour associations</b><span>Vendre les places d’un gala ou d’un concert sans tableur ni chèques.</span></div>
+        <div class="idea"><b>Épicerie et artisanat d’Arménie</b><span>Précommandes groupées de produits introuvables en France.</span></div>
+        <div class="idea"><b>Voyage en Arménie</b><span>Mettre en relation voyageurs de la diaspora et guides locaux.</span></div>
+        <div class="idea"><b>Mentorat diaspora</b><span>Relier étudiants et professionnels expérimentés pour des conseils de carrière.</span></div>
+        <div class="idea"><b>Traiteur pour les fêtes</b><span>Commander des plats traditionnels pour un baptême ou un mariage.</span></div>
+        <div class="idea"><b>Outil pour paroisses et associations</b><span>Adhésions, dons, planning des bénévoles au même endroit.</span></div>
+      </div>
+    </section>
+
+    <!-- Ը -->
+    <section id="pitch">
+      <div class="sec-head"><span class="sec-num">Ը</span><span class="sec-kicker">10 minutes</span><h2>Le pitch</h2></div>
+      <p class="intro">Dix minutes en direct devant le jury et la salle. Montre le produit, pas des slides.</p>
+      <div class="pitchbar" role="img" aria-label="Découpage du pitch : 1 minute problème, 4 minutes démo, 2 minutes business et marketing, 1 minute premier euro, 2 minutes de questions">
+        <div style="flex:1;background:#C8102E"><b>1 min</b><span>Problème</span></div>
+        <div style="flex:4;background:#0B2A6F"><b>4 min</b><span>Démo en direct</span></div>
+        <div style="flex:2;background:#3A57A8"><b>2 min</b><span>Business et marketing</span></div>
+        <div style="flex:1;background:#B77900"><b>1 min</b><span>1er euro</span></div>
+        <div style="flex:2;background:#5E6680"><b>2 min</b><span>Questions</span></div>
+      </div>
+      <div class="tips">
+        <div class="panel"><h3>Les 30 premières secondes</h3><p class="muted" style="font-size:15px">Une phrase : pour qui, et ce que tu remplaces. Pas de présentation d’équipe, pas de sommaire. Puis directement la démo.</p></div>
+        <div class="panel"><h3>Teste avant de monter</h3><p class="muted" style="font-size:15px">Branche-toi au vidéoprojecteur pendant la répétition. Sois connecté partout : produit, tableau de bord de paiement.</p></div>
+        <div class="panel"><h3>Prépare une vidéo de secours</h3><p class="muted" style="font-size:15px">Enregistre une démo propre avant la fin du build, dimanche 10:30. Si le direct plante, lance la vidéo et continue à parler.</p></div>
+        <div class="panel"><h3>Si ça casse sur scène</h3><p class="muted" style="font-size:15px">Raconte ce qui devrait se passer, puis passe à la suite. Le jury retient la façon dont tu rebondis, pas le bug.</p></div>
+      </div>
+      <div class="prompt">
+        <div class="bar"><span>Prompt pour préparer ton pitch avec une IA</span><button class="copy" id="copyBtn" type="button">Copier</button></div>
+        <pre id="promptText">Je présente le projet construit pendant le Haykathon, un hackathon entrepreneurial de 24 heures. J’ai 10 minutes en direct : 1 min de problème, 4 min de démo, 2 min de business et marketing, 1 min de preuve du premier euro, 2 min de questions du jury.
+
+Mon projet : [une phrase : ce qu’il fait et pour qui]
+Ma démo : [ce que je montre, étape par étape]
+Mon modèle : [qui paie, combien]
+Mes canaux marketing : [où je trouve mes clients]
+Mes chiffres réels : [paiements, inscrits, retours]
+
+Le jury note 5 critères sur 20 (note finale sur 100) : idée, réalisation, business plan, plan marketing, premier euro.
+
+Écris-moi un script serré de 8 minutes (hors questions). Indique quel critère chaque passage fait gagner, et prédis la question du jury sur mon point le plus faible, avec une réponse courte.</pre>
+      </div>
+    </section>
+
+    <!-- Թ -->
+    <section id="sur-place">
+      <div class="sec-head"><span class="sec-num">Թ</span><span class="sec-kicker">Vie pratique</span><h2>Sur place</h2></div>
+      <ol class="rules">
+        <li><div><b>Nous sommes accueillis par la paroisse.</b><p>La salle, les repas, la connexion et le mobilier sont offerts par la paroisse Sainte-Croix. On respecte le lieu et on le laisse aussi propre qu’on l’a trouvé.</p></div></li>
+        <li><div><b>Repas et boissons inclus.</b><p>Tous les repas des 24 heures, café et snacks compris, inclus dans les 15 € d’inscription.</p></div></li>
+        <li><div><b>Besoin d’aide ? Lève la main.</b><p>Deux mentors circulent pendant le build, en plus des trois checkpoints (12:30, 17:00, 22:00). Une question bloquante ne doit pas attendre plus de 10 minutes.</p></div></li>
+        <li><div><b>Connexion internet.</b><p>Identifiants affichés à l’entrée : [nom du réseau] / [mot de passe]. Garde ton partage de connexion en secours.</p></div></li>
+      </ol>
+    </section>
+
+    <!-- Ժ -->
+    <section id="apres">
+      <div class="sec-head"><span class="sec-num">Ժ</span><span class="sec-kicker">Le lendemain</span><h2>Après le Haykathon</h2></div>
+      <p class="intro">Samedi matin, ton projet n’existait pas. Dimanche, quelqu’un a payé pour l’utiliser. Voici comment ne pas le laisser mourir dans un dossier.</p>
+      <div class="split">
+        <div class="panel"><h3>Dimanche soir</h3><ul><li>Publie ta démo avec <b>#Haykathon</b> et mentionne le compte Instagram de l’événement</li><li>Sauvegarde ton travail en ligne (GitHub, Drive), pas seulement sur ton ordinateur</li><li>Note ce que tu as appris : où tu as perdu du temps, ce que tu as coupé à raison</li><li>Réponds au questionnaire de retour, il construit l’édition suivante</li></ul></div>
+        <div class="panel"><h3>Si tu veux continuer</h3><ul><li><b>Semaine 1 :</b> pas de nouvelle fonctionnalité. Répare ce qui casse</li><li><b>Semaine 2 :</b> montre-le à trois personnes qui ont vraiment le problème</li><li><b>Semaine 3 :</b> ajoute la fonctionnalité que deux d’entre elles ont demandée</li><li>Ensuite, tu sauras si c’est un projet ou une entreprise</li></ul></div>
+      </div>
+      <p class="muted">Le projet appartient à l’équipe qui l’a construit. L’organisation ne revendique aucun droit dessus.</p>
+    </section>
+
+    <!-- ԺԱ -->
+    <section id="faq">
+      <div class="sec-head"><span class="sec-num">ԺԱ</span><span class="sec-kicker">Questions fréquentes</span><h2>FAQ</h2></div>
+      <div>
+        <details><summary>Je ne sais pas coder, est-ce que je peux venir ?</summary><p>Oui, en équipe avec au moins une personne expérimentée en tech. Les profils business, design ou communication sont indispensables à une bonne équipe.</p></details>
+        <details><summary>Je n’ai pas d’équipe.</summary><p>Viens quand même. Au lancement, les porteurs d’idées présentent leur projet en une minute et les équipes se complètent à 10:30. L’organisation peut les équilibrer si nécessaire. Si tu as un profil tech, tu peux aussi participer seul.</p></details>
+        <details><summary>Faut-il être arménien ?</summary><p>Non. La communauté est prioritaire, mais le Haykathon est ouvert à tous.</p></details>
+        <details><summary>Combien de personnes par équipe ?</summary><p>Il n’y a pas de limite stricte. Entre 3 et 5 personnes, c’est l’idéal pour avancer vite sans se marcher dessus.</p></details>
+        <details><summary>Que comprennent les 15 € d’inscription ?</summary><p>L’accès aux 24 heures, tous les repas, les boissons et les snacks. Les abonnements et crédits d’outils (IA, no-code) restent à la charge des participants.</p></details>
+        <details><summary>Puis-je arriver avec du code déjà écrit ?</summary><p>Un template ou des utilitaires de départ, oui. Un produit déjà construit, non. En cas de doute, parles-en à un mentor dès le lancement.</p></details>
+        <details><summary>Et si personne ne paie pendant les 24 heures ?</summary><p>Tu perds des points sur un critère (20 points), pas sur les cinq. Une liste de précommandes ou d’intéressés reste une vraie preuve, montre-la.</p></details>
+        <details><summary>Qu’est-ce qu’on gagne ?</summary><p>L’équipe gagnante remporte 150 € et un trophée gravé à son nom. Tout le monde repart avec un projet réel et un réseau élargi.</p></details>
+      </div>
+    </section>
+
+    <div class="outro">
+      <h2>À toi de construire.</h2>
+      <p>Des questions avant le jour J ? Écris à [e-mail de l’organisation]. On a hâte de voir ce que tu vas lancer.</p>
+    </div>
+  </main>
+</div>
+
+<script>
+(function () {
+
+  var btn = document.getElementById('copyBtn');
+  var pre = document.getElementById('promptText');
+  btn.addEventListener('click', function () {
+    var done = function () { btn.textContent = 'Copié'; setTimeout(function () { btn.textContent = 'Copier'; }, 1800); };
+    var fallback = function () {
+      var r = document.createRange(); r.selectNodeContents(pre);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      btn.textContent = 'Sélectionné, fais Ctrl+C';
+    };
+    try { navigator.clipboard.writeText(pre.textContent).then(done, fallback); } catch (e) { fallback(); }
+  });
+
+  var links = Array.prototype.slice.call(document.querySelectorAll('nav.toc a'));
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          links.forEach(function (l) { l.classList.toggle('active', l.getAttribute('href') === '#' + en.target.id); });
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { io.observe(s); });
+  }
+})();
+</script>
+
+</body>
+</html>
